@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/layout_background"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:padding="5dp"
+        android:text="Knowledge Competition"
+        android:textColor="@color/title"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/brain" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Welcome! Ready to test your knowledge?"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/subtitle"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/buttonDetails"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="60dp"
+            android:backgroundTint="@color/white"
+            android:onClick="buttonClick"
+            android:text="Details"
+            android:textColor="@color/black"
+            android:textStyle="bold|italic"
+            app:cornerRadius="60dp" />
+
+        <Button
+            android:id="@+id/buttonStart"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="60dp"
+            android:backgroundTint="@color/black"
+            android:onClick="buttonClick"
+            android:text="Start"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            app:cornerRadius="60dp" />
+    </RelativeLayout>
+
+</LinearLayout>
