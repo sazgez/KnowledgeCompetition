@@ -41,7 +41,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/subtitle"
             android:textSize="20dp"
-            android:textStyle="italic" />
+            android:textStyle="italic|bold" />
 
         <Button
             android:id="@+id/buttonDetails"

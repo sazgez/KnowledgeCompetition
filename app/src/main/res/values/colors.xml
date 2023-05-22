@@ -10,4 +10,6 @@
     <color name="layout_background">#5f7935</color>
     <color name="title">#8bc34a</color>
     <color name="subtitle">#d3e5b4</color>
+    <color name="text">#cedc00</color>
+    <color name="my_orange">#FF6A13</color>
 </resources>
