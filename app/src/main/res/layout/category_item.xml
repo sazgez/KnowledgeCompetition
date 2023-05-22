@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@color/layout_background"
+    android:id="@+id/linearLayoutCategory">
+
+
+    <ImageView
+        android:id="@+id/imageViewCategory"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="left|top"
+        android:scaleType="fitXY"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/title"
+        android:text="Category Name" />
+
+</LinearLayout>

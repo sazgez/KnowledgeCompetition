@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent); // navigating to the DetailsActivity
                 break;
             case R.id.buttonStart:
-                //intent = new Intent(MainActivity.this, ???); // creating the intent
+                intent = new Intent(MainActivity.this, CategoryActivity.class); // creating the intent
                 finish(); // finalizing the MainActivity
-                startActivity(intent); // navigating to the ???
+                startActivity(intent); // navigating to the CategoryActivity
                 break;
         }
     }

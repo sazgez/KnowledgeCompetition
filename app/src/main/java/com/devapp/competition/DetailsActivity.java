@@ -22,8 +22,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void buttonClick(View view) {
-        //intent = new Intent(DetailsActivity.this, ???); // creating the intent
+        intent = new Intent(DetailsActivity.this, CategoryActivity.class); // creating the intent
         finish(); // finalizing the DetailsActivity
-        startActivity(intent); // navigating to the ???
+        startActivity(intent); // navigating to the CategoryActivity
     }
 }
