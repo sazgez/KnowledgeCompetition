@@ -36,4 +36,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        // preventing to close the application
+    }
 }

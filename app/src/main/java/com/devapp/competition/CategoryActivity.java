@@ -46,9 +46,9 @@ public class CategoryActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //intent = new Intent(CategoryActivity.this, ???); // creating the intent
-                // intent putExtra
-                //startActivity(intent); // navigating to the ???
+                intent = new Intent(CategoryActivity.this, QuestionActivity.class); // creating the intent
+                intent.putExtra("category", category[position]);
+                startActivity(intent); // navigating to the QuestionActivity
             }
         });
     }
@@ -58,5 +58,10 @@ public class CategoryActivity extends AppCompatActivity {
         dialog.setView(view); // set the view into the AlertDialog
         dialog.setCancelable(true); // clicking anywhere on screen will dismiss the dialog
         dialog.show(); // showing the layout
+    }
+
+    @Override
+    public void onBackPressed() {
+        // preventing to work
     }
 }

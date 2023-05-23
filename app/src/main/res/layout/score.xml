@@ -23,6 +23,6 @@
         android:textStyle="bold|italic"
         android:layout_centerInParent="true"
         android:textColor="@color/text"
-        android:text="Your Score: " />
+        android:text="Your Score: 0" />
 
 </RelativeLayout>

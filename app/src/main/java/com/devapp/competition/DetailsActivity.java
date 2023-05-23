@@ -26,4 +26,9 @@ public class DetailsActivity extends AppCompatActivity {
         finish(); // finalizing the DetailsActivity
         startActivity(intent); // navigating to the CategoryActivity
     }
+
+    @Override
+    public void onBackPressed() {
+        // preventing to close the application
+    }
 }
