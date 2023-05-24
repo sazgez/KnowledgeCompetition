@@ -8,8 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 public class DetailsActivity extends AppCompatActivity {
-
+    // views
     Button buttonReady;
+    // variables
     Intent intent;
 
     @Override

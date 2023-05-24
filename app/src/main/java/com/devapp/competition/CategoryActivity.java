@@ -17,37 +17,78 @@ import android.widget.TextView;
 import java.util.zip.Inflater;
 
 public class CategoryActivity extends AppCompatActivity {
-
+    // views
     ListView listView;
     Button buttonScore;
-    String[] category = {"Technology", "Art", "Football", "History", "Ideology",
-                        "Music", "Science", "Geography", "Book", "Crypto-finance"};
-    int[] image = {R.drawable.technology, R.drawable.art, R.drawable.football, R.drawable.history,
-                R.drawable.ideology, R.drawable.music, R.drawable.science, R.drawable.geography,
-                R.drawable.book, R.drawable.crypto};
+    // variables
+    Category[] categories;
     Adapter adapter;
-    Intent intent;
+    Intent intent, get_intent;
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
+    int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        // binding view
+        // binding views
         listView = (ListView) findViewById(R.id.listView);
         buttonScore = (Button) findViewById(R.id.buttonScore);
-        adapter = new Adapter(category, image, CategoryActivity.this); // creating the adapter
+
         dialog = new AlertDialog.Builder(CategoryActivity.this); // creating the AlertDialog
         inflater = LayoutInflater.from(CategoryActivity.this); // set the inflater
+        // creating questions
+        Question qTech = new Question(
+                "When was Java initially released?",
+                "Java was initially released on January 23, 1996, by Sun Microsystems.",
+                "December 30, 1995",
+                "January 23, 1996",
+                "February 16, 1997",
+                "May 1, 1997",
+                2
+                );
+        Question qArt = new Question();
+        Question qFootball = new Question();
+        Question qHistory = new Question();
+        Question qIdeology = new Question();
+        Question qMusic = new Question();
+        Question qScience = new Question();
+        Question qGeo = new Question();
+        Question qBook = new Question();
+        Question qCrypto = new Question();
+
+        // creating categories
+        Category technology = new Category("Technology", R.drawable.technology, qTech);
+        Category art = new Category("Art", R.drawable.art, qArt);
+        Category football = new Category("Football", R.drawable.football, qFootball);
+        Category history = new Category("History", R.drawable.history, qHistory);
+        Category ideology = new Category("Ideology", R.drawable.ideology, qIdeology);
+        Category music = new Category("Music", R.drawable.music, qMusic);
+        Category science = new Category("Science", R.drawable.science, qScience);
+        Category geography = new Category("Geography", R.drawable.geography, qGeo);
+        Category book = new Category("Book", R.drawable.book, qBook);
+        Category crypto = new Category("Crypto-finance", R.drawable.crypto, qCrypto);
+        // storing each category in our array called 'Category'
+        categories = new Category[]{technology, art, football, history, ideology,
+                                    music, science, geography, book, crypto};
+        adapter = new Adapter(categories, CategoryActivity.this); // creating the adapter
         listView.setAdapter(adapter); // set the adapter to list
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 intent = new Intent(CategoryActivity.this, QuestionActivity.class); // creating the intent
-                intent.putExtra("category", category[position]);
+                intent.putExtra("CategoryName", categories[position].name);
+                intent.putExtra("score", score);
+                intent.putExtra("question", categories[position].question.question);
+                intent.putExtra("answer", categories[position].question.answer);
+                intent.putExtra("option1", categories[position].question.option1);
+                intent.putExtra("option2", categories[position].question.option2);
+                intent.putExtra("option3", categories[position].question.option3);
+                intent.putExtra("option4", categories[position].question.option4);
+                intent.putExtra("rightOption", categories[position].question.rightOption);
                 startActivity(intent); // navigating to the QuestionActivity
             }
         });
@@ -55,8 +96,15 @@ public class CategoryActivity extends AppCompatActivity {
 
     public void buttonClick(View view) {
         view = inflater.inflate(R.layout.score, null); // bound the layout to be showed
+        get_intent = getIntent(); // get contents of QuestionActivity
+        score = get_intent.getIntExtra("score", 0); // update the value of score
+        // binding views
+        TextView textViewScore = (TextView) view.findViewById(R.id.textViewScore);
+        ImageView imageViewIcon = (ImageView) view.findViewById(R.id.imageViewIcon);
+        // setting
         dialog.setView(view); // set the view into the AlertDialog
         dialog.setCancelable(true); // clicking anywhere on screen will dismiss the dialog
+        textViewScore.setText("Your Score: " + score); // updating the score
         dialog.show(); // showing the layout
     }
 

@@ -8,8 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
+    // views
     Button buttonDetails, buttonStart;
+    // variables
     Intent intent;
 
     @Override

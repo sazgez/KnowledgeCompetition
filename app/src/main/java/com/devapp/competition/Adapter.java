@@ -12,18 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class Adapter extends ArrayAdapter<String> {
-    String[] category;
-    int[] image;
-    Context context;
+public class Adapter extends ArrayAdapter<Category> {
+    // views
     LinearLayout linearLayout;
     ImageView imageView;
     TextView textView;
+    // variables
+    Category[] categories;
+    Context context;
 
-    public Adapter(String[] category, int[] image, Context context) { // constructor
-        super(context, R.layout.category_item, category);
-        this.category = category;
-        this.image = image;
+    public Adapter(Category[] categories, Context context) { // constructor
+        super(context, R.layout.category_item, categories);
+        this.categories = categories;
         this.context = context;
     }
 
@@ -38,8 +38,8 @@ public class Adapter extends ArrayAdapter<String> {
             textView = (TextView) view.findViewById(R.id.textViewCategory);
 
             // set views
-            imageView.setImageResource(image[position]);
-            textView.setText(category[position]);
+            imageView.setImageResource(categories[position].image);
+            textView.setText(categories[position].name);
         }
         return view;
     }
