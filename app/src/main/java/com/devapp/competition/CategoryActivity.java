@@ -100,7 +100,6 @@ public class CategoryActivity extends AppCompatActivity {
         score = get_intent.getIntExtra("score", 0); // update the value of score
         // binding views
         TextView textViewScore = (TextView) view.findViewById(R.id.textViewScore);
-        ImageView imageViewIcon = (ImageView) view.findViewById(R.id.imageViewIcon);
         // setting
         dialog.setView(view); // set the view into the AlertDialog
         dialog.setCancelable(true); // clicking anywhere on screen will dismiss the dialog

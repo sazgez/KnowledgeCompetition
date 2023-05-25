@@ -1,12 +1,15 @@
 package com.devapp.competition;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ public class QuestionActivity extends AppCompatActivity {
     ImageButton buttonBack, buttonFinish;
     // variables
     Intent get_intent, intent;
+    AlertDialog.Builder dialog;
     String category, answer;
     int score, rightOption;
 
@@ -42,6 +46,8 @@ public class QuestionActivity extends AppCompatActivity {
         radioButton4 = (RadioButton) findViewById(R.id.radioButton4);
         buttonBack = (ImageButton) findViewById(R.id.imageButtonBack);
         buttonFinish = (ImageButton) findViewById(R.id.imageButtonFinish);
+
+        dialog = new AlertDialog.Builder(QuestionActivity.this); // creating the dialog
 
         get_intent = getIntent(); // get contents of CategoryActivity
         // assigning the contents
@@ -68,7 +74,28 @@ public class QuestionActivity extends AppCompatActivity {
         buttonFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // config the score layout
+                // set
+                dialog.setIcon(R.drawable.ic_exit);
+                dialog.setTitle("GIVING UP?");
+                dialog.setMessage("Are you sure you want to finish the competition?");
+                dialog.setCancelable(false); // prevent clicking anywhere to go back
+                dialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); // return to the competition
+                    }
+                });
+                dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // creating the intent
+                        Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+                        intent.putExtra("score", score);
+                        finish(); // finalizing the QuestionActivity
+                        startActivity(intent); // navigating to the ResultActivity
+                    }
+                });
+                dialog.show(); // showing the layout
             }
         });
         // set the contents

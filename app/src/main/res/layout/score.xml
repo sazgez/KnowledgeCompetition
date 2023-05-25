@@ -5,9 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/my_orange">
 
-
     <ImageView
-        android:id="@+id/imageViewIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_centerInParent="true"
