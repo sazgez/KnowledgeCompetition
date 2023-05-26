@@ -9,9 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
-    // varibales
-    Intent get_intent;
-    int score;
     // views
     TextView textViewScore, textViewMessage;
     ImageView imageView;
@@ -25,19 +22,16 @@ public class ResultActivity extends AppCompatActivity {
         textViewScore = (TextView) findViewById(R.id.textViewScore);
         textViewMessage = (TextView) findViewById(R.id.textViewMessage);
         imageView = (ImageView) findViewById(R.id.imageView);
-        // get the contents of QuestionActivity
-        get_intent = getIntent();
-        // assigning the contents
-        score = get_intent.getIntExtra("score", 0);
+
         // set the score in text
-        textViewScore.setText("Your Score: " + score);
+        textViewScore.setText("Your Score: " + CategoryActivity.score);
         // set the proper image & message according to the score
-        if(score >= 0 && score <= 3) // 0-3
+        if(CategoryActivity.score >= 0 && CategoryActivity.score <= 3) // 0-3
         {
             imageView.setImageResource(R.drawable.give_up);
             textViewMessage.setText("The image explains everything...");
         }
-        else if(score > 3 && score <= 6) // 4-6
+        else if(CategoryActivity.score > 3 && CategoryActivity.score <= 6) // 4-6
         {
             imageView.setImageResource(R.drawable.better);
             textViewMessage.setText("Great. Could be better though.");

@@ -11,11 +11,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class QuestionActivity extends AppCompatActivity {
+public class ImageQuestionActivity extends AppCompatActivity {
     // views
+    ImageView imageView;
     TextView textViewCategory, textViewQuestion, textViewAnswer, textViewOption1,
             textViewOption2, textViewOption3, textViewOption4;
     RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
@@ -29,9 +31,10 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_image_question);
 
         // binding the views
+        imageView = (ImageView) findViewById(R.id.imageView);
         textViewCategory = (TextView) findViewById(R.id.textViewCategory);
         textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
         textViewAnswer = (TextView) findViewById(R.id.textViewAnswer);
@@ -47,12 +50,13 @@ public class QuestionActivity extends AppCompatActivity {
         buttonBack = (ImageButton) findViewById(R.id.imageButtonBack);
         buttonFinish = (ImageButton) findViewById(R.id.imageButtonFinish);
 
-        dialog = new AlertDialog.Builder(QuestionActivity.this); // creating the dialog
+        dialog = new AlertDialog.Builder(ImageQuestionActivity.this); // creating the dialog
 
         get_intent = getIntent(); // get contents of CategoryActivity
         // assigning the contents
         position = get_intent.getIntExtra("position", -1);
         textViewCategory.setText(get_intent.getStringExtra("categoryName"));
+        imageView.setImageResource(get_intent.getIntExtra("image",0));
         textViewQuestion.setText(get_intent.getStringExtra("question"));
         answer = get_intent.getStringExtra("answer");
         textViewOption1.setText(get_intent.getStringExtra("option1"));
@@ -65,8 +69,8 @@ public class QuestionActivity extends AppCompatActivity {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(QuestionActivity.this, CategoryActivity.class); // creating the intent
-                finish(); // finalizing the QuestionActivity
+                intent = new Intent(ImageQuestionActivity.this, CategoryActivity.class); // creating the intent
+                finish(); // finalizing the ImageQuestionActivity
                 startActivity(intent); // navigating to the CategoryActivity
             }
         });
@@ -88,8 +92,8 @@ public class QuestionActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // creating the intent
-                        Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
-                        finish(); // finalizing the QuestionActivity
+                        Intent intent = new Intent(ImageQuestionActivity.this, ResultActivity.class);
+                        finish(); // finalizing the ImageQuestionActivity
                         startActivity(intent); // navigating to the ResultActivity
                     }
                 });
@@ -97,7 +101,6 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
     }
-
     public void buttonClick(View view) {
         switch (view.getId()) {
             case R.id.radioButton1:

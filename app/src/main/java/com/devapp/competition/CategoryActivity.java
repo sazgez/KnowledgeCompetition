@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.zip.Inflater;
 
@@ -24,10 +25,10 @@ public class CategoryActivity extends AppCompatActivity {
     // variables
     Category[] categories;
     Adapter adapter;
-    Intent intent, get_intent;
+    Intent intent;
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
-    int score = 0;
+    static int score;
     static int[] answeredCorrect = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // -1: incorrect, 0: default, 1: correct
 
     @Override
@@ -41,7 +42,6 @@ public class CategoryActivity extends AppCompatActivity {
 
         dialog = new AlertDialog.Builder(CategoryActivity.this); // creating the AlertDialog
         inflater = LayoutInflater.from(CategoryActivity.this); // set the inflater
-        get_intent = getIntent(); // get contents of QuestionActivity
 
         // creating questions
         Question qTech = new Question(
@@ -53,15 +53,91 @@ public class CategoryActivity extends AppCompatActivity {
                 "May 1, 1997",
                 2
                 );
-        Question qArt = new Question();
-        Question qFootball = new Question();
-        Question qHistory = new Question();
-        Question qIdeology = new Question();
-        Question qMusic = new Question();
-        Question qScience = new Question();
-        Question qGeo = new Question();
-        Question qBook = new Question();
-        Question qCrypto = new Question();
+        Question qArt = new Question(
+                R.drawable.leodavinci,
+                "Who does this masterpiece belong to?",
+                "The name of the masterpiece is 'Head of a Woman' which belongs to Leonardo da Vinci.",
+                "Vincent van Gogh",
+                "Salvador Dali",
+                "Leonardo da Vinci",
+                "Pablo Picasso",
+                3
+                );
+        Question qFootball = new Question(
+                R.drawable.zidane,
+                "In which tournament and year did this iconic incident take place?",
+                "The incident that Zidane did a headbutt to Materazzi, took place in 2006 FIFA World Cup.",
+                "2006 FIFA World Cup",
+                "UEFA Euro 2008",
+                "2010 FIFA World Cup",
+                "UEFA Euro 2004",
+                1
+                );
+        Question qHistory = new Question(
+                "Which of the following is not among the leaders of the Soviet Union?",
+                "Leon Trotsky was never the leader of the Soviet Union.",
+                "Vladimir Lenin",
+                "Leon Trotsky",
+                "Mikhail Gorbachev",
+                "Joseph Stalin",
+                2
+                );
+        Question qIdeology = new Question(
+                R.drawable.karlmarx,
+                "Who is this person?",
+                "It's Karl Marx. A German philosopher, economist, journalist and socialist revolutionary.",
+                "Immanuel Kant",
+                "Friedrich Nietzsche",
+                "Karl Marx",
+                "Friedrich Engels",
+                3
+                );
+        Question qMusic = new Question(
+                "Which of the following rappers/songwriters is not originally from the United States?",
+                "Drake's origin is Canada, not the United States.",
+                "Eminem",
+                "Tupac Shakur",
+                "Dr. Dre",
+                "Drake",
+                4
+                );
+        Question qScience = new Question(
+                "What is the most abundant gas in the Earth's atmosphere?",
+                "It's nitrogen (78%), followed by oxygen (21%), argon (0.93%), and carbon dioxide (0.03%).",
+                "Nitrogen (N₂)",
+                "Argon (Ar)",
+                "Carbon dioxide (CO₂)",
+                "Oxygen (O₂)",
+                1
+                );
+        Question qGeo = new Question(
+                R.drawable.finland,
+                "Which country does the red place on the map represent?",
+                "It's Finland.",
+                "Denmark",
+                "Finland",
+                "Ireland",
+                "Sweden",
+                2
+                );
+        Question qBook = new Question(
+                "Which of the following books was not written or contributed to by Friedrich Engels?",
+                "The Antichrist belongs to Friedrich Nietzsche.",
+                "The German Ideology",
+                "Dialectics of Nature",
+                "The Antichrist",
+                "The Communist Manifesto",
+                3
+                );
+        Question qCrypto = new Question(
+                "When was Bitcoin officially released?",
+                "On October 2008, the whitepaper of Bitcoin was published and on January 2009, Bitcoin was officially released.",
+                "February 2009",
+                "November 2008",
+                "October 2008",
+                "January 2009",
+                4
+                );
 
         // creating categories
         Category technology = new Category("Technology", R.drawable.technology, qTech);
@@ -86,25 +162,42 @@ public class CategoryActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                intent = new Intent(CategoryActivity.this, QuestionActivity.class); // creating the intent
-                intent.putExtra("position", position);
-                intent.putExtra("categoryName", categories[position].name);
-                intent.putExtra("score", score);
-                intent.putExtra("question", categories[position].question.question);
-                intent.putExtra("answer", categories[position].question.answer);
-                intent.putExtra("option1", categories[position].question.option1);
-                intent.putExtra("option2", categories[position].question.option2);
-                intent.putExtra("option3", categories[position].question.option3);
-                intent.putExtra("option4", categories[position].question.option4);
-                intent.putExtra("rightOption", categories[position].question.rightOption);
-                startActivity(intent); // navigating to the QuestionActivity
+                if(answeredCorrect[position] == 0) { // if the question hasn't been answered yet
+                    if(categories[position].question.image == 0) { // questions without images
+                        intent = new Intent(CategoryActivity.this, QuestionActivity.class); // creating the intent
+                        intent.putExtra("position", position);
+                        intent.putExtra("categoryName", categories[position].name);
+                        intent.putExtra("question", categories[position].question.question);
+                        intent.putExtra("answer", categories[position].question.answer);
+                        intent.putExtra("option1", categories[position].question.option1);
+                        intent.putExtra("option2", categories[position].question.option2);
+                        intent.putExtra("option3", categories[position].question.option3);
+                        intent.putExtra("option4", categories[position].question.option4);
+                        intent.putExtra("rightOption", categories[position].question.rightOption);
+                        startActivity(intent); // navigating to the QuestionActivity
+                    } else { // questions with images
+                        intent = new Intent(CategoryActivity.this, ImageQuestionActivity.class); // creating the intent
+                        intent.putExtra("position", position);
+                        intent.putExtra("categoryName", categories[position].name);
+                        intent.putExtra("image", categories[position].question.image);
+                        intent.putExtra("question", categories[position].question.question);
+                        intent.putExtra("answer", categories[position].question.answer);
+                        intent.putExtra("option1", categories[position].question.option1);
+                        intent.putExtra("option2", categories[position].question.option2);
+                        intent.putExtra("option3", categories[position].question.option3);
+                        intent.putExtra("option4", categories[position].question.option4);
+                        intent.putExtra("rightOption", categories[position].question.rightOption);
+                        startActivity(intent); // navigating to the ImageQuestionActivity
+                    }
+                } else { // if the question has been answered before
+                    Toast.makeText(CategoryActivity.this, "You've already answered the question.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     public void buttonClick(View view) {
         view = inflater.inflate(R.layout.score, null); // bound the layout to be showed
-        score = get_intent.getIntExtra("score", 0); // update the value of score
         // binding views
         TextView textViewScore = (TextView) view.findViewById(R.id.textViewScore);
         // setting
