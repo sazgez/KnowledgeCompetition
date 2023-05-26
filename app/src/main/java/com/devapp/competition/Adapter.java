@@ -1,6 +1,7 @@
 package com.devapp.competition;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,10 @@ public class Adapter extends ArrayAdapter<Category> {
             // set views
             imageView.setImageResource(categories[position].image);
             textView.setText(categories[position].name);
+            if(CategoryActivity.answeredCorrect[position] == 1) // if correctly answered,
+                linearLayout.setBackgroundColor(Color.GREEN); // change the background as green.
+            else if(CategoryActivity.answeredCorrect[position] == -1) // if incorrectly answered,
+                linearLayout.setBackgroundColor(Color.RED); // change the background as red.
         }
         return view;
     }

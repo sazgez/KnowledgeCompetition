@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ public class CategoryActivity extends AppCompatActivity {
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
     int score = 0;
+    static int[] answeredCorrect = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // -1: incorrect, 0: default, 1: correct
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class CategoryActivity extends AppCompatActivity {
 
         dialog = new AlertDialog.Builder(CategoryActivity.this); // creating the AlertDialog
         inflater = LayoutInflater.from(CategoryActivity.this); // set the inflater
+        get_intent = getIntent(); // get contents of QuestionActivity
+
         // creating questions
         Question qTech = new Question(
                 "When was Java initially released?",
@@ -70,17 +74,21 @@ public class CategoryActivity extends AppCompatActivity {
         Category geography = new Category("Geography", R.drawable.geography, qGeo);
         Category book = new Category("Book", R.drawable.book, qBook);
         Category crypto = new Category("Crypto-finance", R.drawable.crypto, qCrypto);
+
         // storing each category in our array called 'Category'
         categories = new Category[]{technology, art, football, history, ideology,
                                     music, science, geography, book, crypto};
+
         adapter = new Adapter(categories, CategoryActivity.this); // creating the adapter
+
         listView.setAdapter(adapter); // set the adapter to list
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 intent = new Intent(CategoryActivity.this, QuestionActivity.class); // creating the intent
-                intent.putExtra("CategoryName", categories[position].name);
+                intent.putExtra("position", position);
+                intent.putExtra("categoryName", categories[position].name);
                 intent.putExtra("score", score);
                 intent.putExtra("question", categories[position].question.question);
                 intent.putExtra("answer", categories[position].question.answer);
@@ -96,7 +104,6 @@ public class CategoryActivity extends AppCompatActivity {
 
     public void buttonClick(View view) {
         view = inflater.inflate(R.layout.score, null); // bound the layout to be showed
-        get_intent = getIntent(); // get contents of QuestionActivity
         score = get_intent.getIntExtra("score", 0); // update the value of score
         // binding views
         TextView textViewScore = (TextView) view.findViewById(R.id.textViewScore);

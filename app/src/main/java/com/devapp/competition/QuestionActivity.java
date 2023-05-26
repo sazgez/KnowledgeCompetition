@@ -23,8 +23,8 @@ public class QuestionActivity extends AppCompatActivity {
     // variables
     Intent get_intent, intent;
     AlertDialog.Builder dialog;
-    String category, answer;
-    int score, rightOption;
+    String answer;
+    int score, rightOption, position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,8 @@ public class QuestionActivity extends AppCompatActivity {
 
         get_intent = getIntent(); // get contents of CategoryActivity
         // assigning the contents
-        category = get_intent.getStringExtra("CategoryName");
+        position = get_intent.getIntExtra("position", -1);
+        textViewCategory.setText(get_intent.getStringExtra("categoryName"));
         score = get_intent.getIntExtra("score", 0);
         textViewQuestion.setText(get_intent.getStringExtra("question"));
         answer = get_intent.getStringExtra("answer");
@@ -98,10 +99,6 @@ public class QuestionActivity extends AppCompatActivity {
                 dialog.show(); // showing the layout
             }
         });
-        // set the contents
-        if(!TextUtils.isEmpty(category)) { // if variable is not null
-            textViewCategory.setText(category);
-        }
     }
 
     public void buttonClick(View view) {
@@ -111,8 +108,12 @@ public class QuestionActivity extends AppCompatActivity {
                 radioButton2.setClickable(false);
                 radioButton3.setClickable(false);
                 radioButton4.setClickable(false);
-                if(rightOption == 1)
+                if(rightOption == 1) {
                     score++; // increment the score
+                    CategoryActivity.answeredCorrect[position] = 1; // question have been answered correctly
+                } else {
+                    CategoryActivity.answeredCorrect[position] = -1; // question have been answered incorrectly
+                }
                 textViewAnswer.setText(answer); // show the right answer
                 break;
             case R.id.radioButton2:
@@ -120,8 +121,12 @@ public class QuestionActivity extends AppCompatActivity {
                 radioButton1.setClickable(false);
                 radioButton3.setClickable(false);
                 radioButton4.setClickable(false);
-                if(rightOption == 2)
+                if(rightOption == 2) {
                     score++; // increment the score
+                    CategoryActivity.answeredCorrect[position] = 1; // question have been answered correctly
+                } else {
+                    CategoryActivity.answeredCorrect[position] = -1; // question have been answered incorrectly
+                }
                 textViewAnswer.setText(answer); // show the right answer
                 break;
             case R.id.radioButton3:
@@ -129,8 +134,12 @@ public class QuestionActivity extends AppCompatActivity {
                 radioButton2.setClickable(false);
                 radioButton1.setClickable(false);
                 radioButton4.setClickable(false);
-                if(rightOption == 3)
+                if(rightOption == 3) {
                     score++; // increment the score
+                    CategoryActivity.answeredCorrect[position] = 1; // question have been answered correctly
+                } else {
+                    CategoryActivity.answeredCorrect[position] = -1; // question have been answered incorrectly
+                }
                 textViewAnswer.setText(answer); // show the right answer
                 break;
             case R.id.radioButton4:
@@ -138,8 +147,12 @@ public class QuestionActivity extends AppCompatActivity {
                 radioButton2.setClickable(false);
                 radioButton3.setClickable(false);
                 radioButton1.setClickable(false);
-                if(rightOption == 4)
+                if(rightOption == 4) {
                     score++; // increment the score
+                    CategoryActivity.answeredCorrect[position] = 1; // question have been answered correctly
+                } else {
+                    CategoryActivity.answeredCorrect[position] = -1; // question have been answered incorrectly
+                }
                 textViewAnswer.setText(answer); // show the right answer
                 break;
         }
