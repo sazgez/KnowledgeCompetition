@@ -28,7 +28,7 @@ public class CategoryActivity extends AppCompatActivity {
     Intent intent;
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
-    static int score;
+    static int score, counter = 0; // 'counter' count the number of answered question
     static int[] answeredCorrect = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // -1: incorrect, 0: default, 1: correct
 
     @Override
@@ -36,6 +36,11 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
+        if(counter == 10) { // if all questions have been answered
+            intent = new Intent(CategoryActivity.this, ResultActivity.class); // creating the intent
+            finish(); // finalizing the CategoryActivity
+            startActivity(intent); // navigating to the ResultActivity
+        }
         // binding views
         listView = (ListView) findViewById(R.id.listView);
         buttonScore = (Button) findViewById(R.id.buttonScore);

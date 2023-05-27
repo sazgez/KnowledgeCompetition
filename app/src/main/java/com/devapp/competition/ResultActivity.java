@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
     // views
-    TextView textViewScore, textViewMessage;
+    TextView textViewTitle, textViewScore, textViewMessage;
     ImageView imageView;
 
     @Override
@@ -19,10 +20,15 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         // binding views
+        textViewTitle = (TextView) findViewById(R.id.textViewTitle);
         textViewScore = (TextView) findViewById(R.id.textViewScore);
         textViewMessage = (TextView) findViewById(R.id.textViewMessage);
         imageView = (ImageView) findViewById(R.id.imageView);
-
+        // set the proper title
+        if(CategoryActivity.counter == 10)
+            textViewTitle.setText("You've answered all questions");
+        else
+            textViewTitle.setText("There is unanswered questions");
         // set the score in text
         textViewScore.setText("Your Score: " + CategoryActivity.score);
         // set the proper image & message according to the score

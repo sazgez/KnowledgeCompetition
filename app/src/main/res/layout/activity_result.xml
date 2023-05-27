@@ -9,13 +9,15 @@
     tools:context=".ResultActivity">
 
     <TextView
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         android:padding="5dp"
         android:text="Knowledge Competition"
         android:textColor="@color/title"
+        android:textAlignment="center"
         android:textSize="30dp"
         android:textStyle="bold" />
 
@@ -24,7 +26,7 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         app:srcCompat="@drawable/great_job" />
 
     <LinearLayout
@@ -80,11 +82,12 @@
         android:id="@+id/textViewMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="23dp"
+        android:layout_margin="30dp"
         android:text="Message"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:textColor="@color/subtitle"
         android:textSize="20dp"
+        android:textAlignment="center"
         android:textStyle="italic|bold" />
 
 </LinearLayout>

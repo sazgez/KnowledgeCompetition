@@ -15,6 +15,7 @@
         android:layout_marginTop="50dp"
         android:padding="5dp"
         android:text="Details and Rules"
+        android:textAlignment="center"
         android:textColor="@color/title"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -34,10 +35,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="There are several categories with questions to be answered."
             android:textColor="@color/text"
             android:textSize="20dp"
+            android:textAlignment="center"
             android:textStyle="italic" />
     </LinearLayout>
 
@@ -56,9 +57,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="4 options for each question and only one of them is correct."
             android:textColor="@color/text"
+            android:textAlignment="center"
             android:textSize="20dp"
             android:textStyle="italic" />
     </LinearLayout>
@@ -78,9 +79,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="You get 1 point for each correct answer and no points for wrong answers."
             android:textColor="@color/text"
+            android:textAlignment="center"
             android:textSize="20dp"
             android:textStyle="italic" />
     </LinearLayout>
@@ -100,8 +101,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="The correct answer will appear immediately after your choice."
+            android:textAlignment="center"
             android:textColor="@color/text"
             android:textSize="20dp"
             android:textStyle="italic" />
@@ -113,6 +114,7 @@
         android:layout_gravity="center"
         android:layout_margin="30dp"
         android:text="Ready for starting?"
+        android:textAlignment="center"
         android:textColor="@color/subtitle"
         android:textSize="20dp"
         android:textStyle="italic|bold" />
@@ -123,7 +125,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/my_orange"
+        android:backgroundTint="@color/my_special"
         android:onClick="buttonClick"
         android:text="Ready"
         android:textColor="@color/text"

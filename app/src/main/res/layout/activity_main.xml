@@ -14,6 +14,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:padding="5dp"
+        android:textAlignment="center"
         android:text="Knowledge Competition"
         android:textColor="@color/title"
         android:textSize="30dp"
@@ -39,6 +40,7 @@
             android:layout_marginTop="40dp"
             android:text="Welcome! Ready to test your knowledge?"
             android:layout_centerHorizontal="true"
+            android:textAlignment="center"
             android:textColor="@color/subtitle"
             android:textSize="20dp"
             android:textStyle="italic|bold" />
@@ -50,10 +52,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="60dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/text"
             android:onClick="buttonClick"
             android:text="Details"
-            android:textColor="@color/black"
+            android:textColor="@color/my_special"
             android:textStyle="bold|italic"
             app:cornerRadius="60dp" />
 
@@ -64,10 +66,10 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="60dp"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/my_special"
             android:onClick="buttonClick"
             android:text="Start"
-            android:textColor="@color/white"
+            android:textColor="@color/text"
             android:textStyle="bold|italic"
             app:cornerRadius="60dp" />
     </RelativeLayout>

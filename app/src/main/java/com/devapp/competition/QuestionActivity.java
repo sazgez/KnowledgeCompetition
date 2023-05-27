@@ -112,6 +112,7 @@ public class QuestionActivity extends AppCompatActivity {
                     CategoryActivity.answeredCorrect[position] = -1; // question have been answered incorrectly
                 }
                 textViewAnswer.setText(answer); // show the right answer
+                CategoryActivity.counter++; // increment the counter
                 break;
             case R.id.radioButton2:
                 // disable clicking other buttons
@@ -125,6 +126,7 @@ public class QuestionActivity extends AppCompatActivity {
                     CategoryActivity.answeredCorrect[position] = -1; // question have been answered incorrectly
                 }
                 textViewAnswer.setText(answer); // show the right answer
+                CategoryActivity.counter++; // increment the counter
                 break;
             case R.id.radioButton3:
                 // disable clicking other buttons
@@ -138,6 +140,7 @@ public class QuestionActivity extends AppCompatActivity {
                     CategoryActivity.answeredCorrect[position] = -1; // question have been answered incorrectly
                 }
                 textViewAnswer.setText(answer); // show the right answer
+                CategoryActivity.counter++; // increment the counter
                 break;
             case R.id.radioButton4:
                 // disable clicking other buttons
@@ -151,6 +154,7 @@ public class QuestionActivity extends AppCompatActivity {
                     CategoryActivity.answeredCorrect[position] = -1; // question have been answered incorrectly
                 }
                 textViewAnswer.setText(answer); // show the right answer
+                CategoryActivity.counter++; // increment the counter
                 break;
         }
     }
