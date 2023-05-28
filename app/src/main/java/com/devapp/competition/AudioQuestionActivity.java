@@ -4,35 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
-public class ImageQuestionActivity extends AppCompatActivity {
+public class AudioQuestionActivity extends AppCompatActivity {
     // views
-    ImageView imageView;
     TextView textViewCategory, textViewQuestion, textViewAnswer, textViewOption1,
             textViewOption2, textViewOption3, textViewOption4;
     RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     ImageButton buttonBack, buttonFinish;
     Button buttonNo, buttonYes;
+    Switch switchButton;
     // variables
     Intent get_intent, intent;
+    MediaPlayer mediaPlayer;
     Dialog dialog;
     String answer;
-    int rightOption, position;
+    int rightOption, position, audio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_question);
+        setContentView(R.layout.activity_audio_question);
 
         // binding the views
-        imageView = (ImageView) findViewById(R.id.imageView);
         textViewCategory = (TextView) findViewById(R.id.textViewCategory);
         textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
         textViewAnswer = (TextView) findViewById(R.id.textViewAnswer);
@@ -47,14 +49,15 @@ public class ImageQuestionActivity extends AppCompatActivity {
         radioButton4 = (RadioButton) findViewById(R.id.radioButton4);
         buttonBack = (ImageButton) findViewById(R.id.imageButtonBack);
         buttonFinish = (ImageButton) findViewById(R.id.imageButtonFinish);
+        switchButton = (Switch) findViewById(R.id.switchButton);
 
-        dialog = new Dialog(ImageQuestionActivity.this, R.style.DialogCornerRadius); // creating the dialog
+        dialog = new Dialog(AudioQuestionActivity.this, R.style.DialogCornerRadius); // creating the dialog
 
         get_intent = getIntent(); // get contents of CategoryActivity
         // assigning the contents
         position = get_intent.getIntExtra("position", -1);
         textViewCategory.setText(get_intent.getStringExtra("categoryName"));
-        imageView.setImageResource(get_intent.getIntExtra("image",0));
+        audio = get_intent.getIntExtra("audio", 0);
         textViewQuestion.setText(get_intent.getStringExtra("question"));
         answer = get_intent.getStringExtra("answer");
         textViewOption1.setText(get_intent.getStringExtra("option1"));
@@ -63,12 +66,24 @@ public class ImageQuestionActivity extends AppCompatActivity {
         textViewOption4.setText(get_intent.getStringExtra("option4"));
         rightOption = get_intent.getIntExtra("rightOption", 0);
 
+        mediaPlayer = MediaPlayer.create(AudioQuestionActivity.this, audio); // create the media player
+
+        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) // if switch is on
+                    mediaPlayer.start();
+                else // if switch is off
+                    mediaPlayer.pause();
+            }
+        });
+
         // Anonymous Events
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(ImageQuestionActivity.this, CategoryActivity.class); // creating the intent
-                finish(); // finalizing the ImageQuestionActivity
+                intent = new Intent(AudioQuestionActivity.this, CategoryActivity.class); // creating the intent
+                finish(); // finalizing the AudioQuestionActivity
                 startActivity(intent); // navigating to the CategoryActivity
             }
         });
@@ -92,8 +107,8 @@ public class ImageQuestionActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // creating the intent
-                        Intent intent = new Intent(ImageQuestionActivity.this, ResultActivity.class);
-                        finish(); // finalizing the ImageQuestionActivity
+                        Intent intent = new Intent(AudioQuestionActivity.this, ResultActivity.class);
+                        finish(); // finalizing the AudioQuestionActivity
                         startActivity(intent); // navigating to the ResultActivity
                     }
                 });
@@ -101,6 +116,7 @@ public class ImageQuestionActivity extends AppCompatActivity {
             }
         });
     }
+
     public void buttonClick(View view) {
         switch (view.getId()) {
             case R.id.radioButton1:

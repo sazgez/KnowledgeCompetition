@@ -1,19 +1,13 @@
 package com.devapp.competition;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,13 +92,14 @@ public class CategoryActivity extends AppCompatActivity {
                 3
                 );
         Question qMusic = new Question(
-                "Which of the following rappers/songwriters is not originally from the United States?",
-                "Drake's origin is Canada, not the United States.",
-                "Eminem",
-                "Tupac Shakur",
-                "Dr. Dre",
-                "Drake",
-                4
+                "Which of the following sings the music you are listening to?",
+                "The singer is Flo Rida.",
+                "Future",
+                "Pitbull",
+                "Usher",
+                "Flo Rida",
+                4,
+                R.raw.florida
                 );
         Question qScience = new Question(
                 "What is the most abundant gas in the Earth's atmosphere?",
@@ -168,7 +163,7 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(answeredCorrect[position] == 0) { // if the question hasn't been answered yet
-                    if(categories[position].question.image == 0) { // questions without images
+                    if(categories[position].question.image == 0 && categories[position].question.audio == 0) { // questions without images & audio
                         intent = new Intent(CategoryActivity.this, QuestionActivity.class); // creating the intent
                         intent.putExtra("position", position);
                         intent.putExtra("categoryName", categories[position].name);
@@ -180,7 +175,7 @@ public class CategoryActivity extends AppCompatActivity {
                         intent.putExtra("option4", categories[position].question.option4);
                         intent.putExtra("rightOption", categories[position].question.rightOption);
                         startActivity(intent); // navigating to the QuestionActivity
-                    } else { // questions with images
+                    } else if(categories[position].question.audio == 0) { // questions with images
                         intent = new Intent(CategoryActivity.this, ImageQuestionActivity.class); // creating the intent
                         intent.putExtra("position", position);
                         intent.putExtra("categoryName", categories[position].name);
@@ -193,6 +188,19 @@ public class CategoryActivity extends AppCompatActivity {
                         intent.putExtra("option4", categories[position].question.option4);
                         intent.putExtra("rightOption", categories[position].question.rightOption);
                         startActivity(intent); // navigating to the ImageQuestionActivity
+                    } else { // questions with audio
+                        intent = new Intent(CategoryActivity.this, AudioQuestionActivity.class); // creating the intent
+                        intent.putExtra("position", position);
+                        intent.putExtra("categoryName", categories[position].name);
+                        intent.putExtra("audio", categories[position].question.audio);
+                        intent.putExtra("question", categories[position].question.question);
+                        intent.putExtra("answer", categories[position].question.answer);
+                        intent.putExtra("option1", categories[position].question.option1);
+                        intent.putExtra("option2", categories[position].question.option2);
+                        intent.putExtra("option3", categories[position].question.option3);
+                        intent.putExtra("option4", categories[position].question.option4);
+                        intent.putExtra("rightOption", categories[position].question.rightOption);
+                        startActivity(intent); // navigating to the AudioQuestionActivity
                     }
                 } else { // if the question has been answered before
                     Toast.makeText(CategoryActivity.this, "You've already answered the question.", Toast.LENGTH_SHORT).show();
