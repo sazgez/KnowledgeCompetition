@@ -3,12 +3,14 @@ package com.devapp.competition;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,8 +28,7 @@ public class CategoryActivity extends AppCompatActivity {
     Category[] categories;
     Adapter adapter;
     Intent intent;
-    AlertDialog.Builder dialog;
-    LayoutInflater inflater;
+    Dialog dialog;
     static int score, counter = 0; // 'counter' count the number of answered question
     static int[] answeredCorrect = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // -1: incorrect, 0: default, 1: correct
 
@@ -45,8 +46,7 @@ public class CategoryActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         buttonScore = (Button) findViewById(R.id.buttonScore);
 
-        dialog = new AlertDialog.Builder(CategoryActivity.this); // creating the AlertDialog
-        inflater = LayoutInflater.from(CategoryActivity.this); // set the inflater
+        dialog = new Dialog(CategoryActivity.this, R.style.DialogCornerRadius); // creating the AlertDialog
 
         // creating questions
         Question qTech = new Question(
@@ -202,13 +202,11 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     public void buttonClick(View view) {
-        view = inflater.inflate(R.layout.score, null); // bound the layout to be showed
-        // binding views
-        TextView textViewScore = (TextView) view.findViewById(R.id.textViewScore);
-        // setting
-        dialog.setView(view); // set the view into the AlertDialog
-        dialog.setCancelable(true); // clicking anywhere on screen will dismiss the dialog
+        // set attributes of the dialog
+        dialog.setContentView(R.layout.score); // set the layout to dialog
+        TextView textViewScore = (TextView) dialog.findViewById(R.id.textViewScore); // binding the view
         textViewScore.setText("Your Score: " + score); // updating the score
+        dialog.setCancelable(true); // clicking anywhere on screen will dismiss the dialog
         dialog.show(); // showing the layout
     }
 

@@ -12,6 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="dialogCornerRadius">60dp</item>
+    </style>
+    <!-- My special design of dialogs -->
+    <style name="DialogCornerRadius" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="dialogCornerRadius">30dp</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 </resources>

@@ -3,6 +3,7 @@ package com.devapp.competition;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -22,9 +25,10 @@ public class ImageQuestionActivity extends AppCompatActivity {
             textViewOption2, textViewOption3, textViewOption4;
     RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     ImageButton buttonBack, buttonFinish;
+    Button buttonNo, buttonYes;
     // variables
     Intent get_intent, intent;
-    AlertDialog.Builder dialog;
+    Dialog dialog;
     String answer;
     int rightOption, position;
 
@@ -50,7 +54,7 @@ public class ImageQuestionActivity extends AppCompatActivity {
         buttonBack = (ImageButton) findViewById(R.id.imageButtonBack);
         buttonFinish = (ImageButton) findViewById(R.id.imageButtonFinish);
 
-        dialog = new AlertDialog.Builder(ImageQuestionActivity.this); // creating the dialog
+        dialog = new Dialog(ImageQuestionActivity.this, R.style.DialogCornerRadius); // creating the dialog
 
         get_intent = getIntent(); // get contents of CategoryActivity
         // assigning the contents
@@ -77,20 +81,22 @@ public class ImageQuestionActivity extends AppCompatActivity {
         buttonFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // set
-                dialog.setIcon(R.drawable.ic_exit);
-                dialog.setTitle("GIVING UP?");
-                dialog.setMessage("Are you sure you want to finish the competition?");
+                // set attributes of the dialog
+                dialog.setContentView(R.layout.finish_dialog); // set the layout to dialog
                 dialog.setCancelable(false); // prevent clicking anywhere to go back
-                dialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                // binding the views of finish_dialog
+                buttonNo = (Button) dialog.findViewById(R.id.buttonNo);
+                buttonYes = (Button) dialog.findViewById(R.id.buttonYes);
+
+                buttonNo.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         dialog.dismiss(); // return to the competition
                     }
                 });
-                dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                buttonYes.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         // creating the intent
                         Intent intent = new Intent(ImageQuestionActivity.this, ResultActivity.class);
                         finish(); // finalizing the ImageQuestionActivity
