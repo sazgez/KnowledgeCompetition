@@ -25,7 +25,7 @@ public class ResultActivity extends AppCompatActivity {
         if(CategoryActivity.counter == 10)
             textViewTitle.setText("You've answered all questions");
         else
-            textViewTitle.setText("There is unanswered questions");
+            textViewTitle.setText("There was unanswered questions");
         // set the score in text
         textViewScore.setText("Your Score: " + CategoryActivity.score);
         // set the proper image & message according to the score

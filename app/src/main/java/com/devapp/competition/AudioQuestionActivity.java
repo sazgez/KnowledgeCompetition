@@ -83,6 +83,7 @@ public class AudioQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(AudioQuestionActivity.this, CategoryActivity.class); // creating the intent
+                mediaPlayer.stop(); // stop the player
                 finish(); // finalizing the AudioQuestionActivity
                 startActivity(intent); // navigating to the CategoryActivity
             }
@@ -108,6 +109,7 @@ public class AudioQuestionActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         // creating the intent
                         Intent intent = new Intent(AudioQuestionActivity.this, ResultActivity.class);
+                        mediaPlayer.stop(); // stop the player
                         finish(); // finalizing the AudioQuestionActivity
                         startActivity(intent); // navigating to the ResultActivity
                     }

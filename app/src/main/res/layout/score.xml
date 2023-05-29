@@ -22,6 +22,6 @@
         android:textSize="20dp"
         android:textStyle="bold|italic"
         android:textColor="@color/text"
-        android:text="Your Score: 0" />
+        android:text="Your Score:   0" />
 
 </LinearLayout>

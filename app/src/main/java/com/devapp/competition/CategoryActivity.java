@@ -213,7 +213,7 @@ public class CategoryActivity extends AppCompatActivity {
         // set attributes of the dialog
         dialog.setContentView(R.layout.score); // set the layout to dialog
         TextView textViewScore = (TextView) dialog.findViewById(R.id.textViewScore); // binding the view
-        textViewScore.setText("Your Score: " + score); // updating the score
+        textViewScore.setText("Your Score:   " + score); // updating the score
         dialog.setCancelable(true); // clicking anywhere on screen will dismiss the dialog
         dialog.show(); // showing the layout
     }
